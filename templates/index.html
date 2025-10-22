@@ -32,12 +32,45 @@
     </style>
 </head>
 <body>
-    <h1>Lista de Gastos</h1>
+    
+    <div>
+        <h2>Adicionar gastos</h2>
 
+        <form action="/store" method="POST">
+            <div>
+                <label for="item">Título</label> <br>
+                <input type="text" name="item" id="item" placeholder="Ex: Compras no mercado">
+            </div>
+
+            <div>
+                <label for="amount">Valor</label> <br>
+                <input type="text" name="amount" id="amount" placeholder="Ex: 200 kz">
+            </div>
+
+            <div>
+                <label for="date">Data</label> <br>
+                <input type="date" name="date" id="date" placeholder="Data da transação">
+            </div>
+
+            <button type="submit">Registar</button>
+        </form>
+    </div>
+
+    <h2>Lista de Gastos</h2>
     <ol>
         {% for expense in expenses %}
-            <li>
-                {{expense.item}} - $ {{expense.amount}}
+            <li style="display: flex; flex-direction: row; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <form action="/update/{{ expense.id }}" method="post">
+                    <input type="text" name="item" value="{{ expense.item }}" required>
+                    <input type="text" name="amount" value="{{ expense.amount }}" required>
+                    <button type="submit">Atualizar</button>
+                </form>
+
+                <span>
+                    <form style="display: inline" action="/delete/{{ expense.id }}" method="post">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </span>
             </li>
         {% endfor %}
     </ol>
