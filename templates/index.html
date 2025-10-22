@@ -4,8 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gastos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            font-size: 26px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        ol {
+            background: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            margin-bottom: 10px;
+            margin: 0;
+            font-size: 18px;
+            padding: 10px 0;
+            border-bottom: 1px solid #7e8697ff;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Lista de Gastos</h1>
+
+    <ol>
+        {% for expense in expenses %}
+            <li>
+                {{expense.item}} - $ {{expense.amount}}
+            </li>
+        {% endfor %}
+    </ol>
 </body>
 </html>
