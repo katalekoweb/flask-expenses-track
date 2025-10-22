@@ -1,3 +1,6 @@
 flask
 flask_sqlalchemy
 requests
+psycopg2-binary
+alembic
+flask_migrate
