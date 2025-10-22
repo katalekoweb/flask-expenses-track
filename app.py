@@ -1,6 +1,7 @@
 from flask import  Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///expenses.db'
@@ -17,7 +18,8 @@ class Expenses(db.Model):
 @app.route('/')
 def index():
     expenses = Expenses.query.order_by(Expenses.id.desc()).all()
-    return render_template('index.html', expenses=expenses)
+    total = db.session.query(func.sum(Expenses.amount)).scalar()
+    return render_template('index.html', expenses=expenses, total=total)
 
 # Crud
 @app.route('/store', methods=['POST'])
