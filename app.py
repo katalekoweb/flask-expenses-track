@@ -77,12 +77,14 @@ def update_expense(expense_id):
     return render_template('update.html', expense=expense)
 
 # API routes
+# index
 @app.route('/api/expenses', methods=['GET'])
-def get_expenses():
+def api_get_expenses():
     expenses = Expenses.query.all()
     expenses_list = [expense.as_dict() for expense in expenses]
     return jsonify(expenses_list), 200
 
+# store
 @app.route('/api/expenses', methods=['POST'])
 def api_store_expense():
     data = request.get_json()
