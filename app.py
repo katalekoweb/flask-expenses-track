@@ -103,6 +103,10 @@ def api_store_expense():
     return jsonify({'message': 'Gasto registado com sucesso'}), 201
     
 
+# For Vercel
+def handler(request, *args, **kwargs):
+    return app(request, *args, **kwargs)
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
